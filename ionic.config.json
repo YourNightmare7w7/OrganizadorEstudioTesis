@@ -1,0 +1,7 @@
+{
+  "name": "OrganizadorEstudio",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
