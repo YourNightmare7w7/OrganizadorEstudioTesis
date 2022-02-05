@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private navCtrl:NavController) {}
+toNotes(){
+  this.navCtrl.navigateForward('note')
+}
 }

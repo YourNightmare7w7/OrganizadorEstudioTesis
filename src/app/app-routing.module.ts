@@ -8,8 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'note',
     pathMatch: 'full'
+  },
+  {
+    path: 'note',
+    loadChildren: () => import('./page/notes/note/note.module').then( m => m.NotePageModule)
+  },
+  {
+    path: 'note/:title',
+    loadChildren: () => import('./page/notes/add-note/add-note.module').then( m => m.AddNotePageModule)
   },
 ];
 
