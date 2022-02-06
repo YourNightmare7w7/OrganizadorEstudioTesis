@@ -30,11 +30,12 @@ export class AddNotePage implements OnInit {
     };
   }
   async ngOnInit() {
-    this.notesService.start();
     this.nueva = false;
-
     await this.notesService.notes.find(({ id }) => id === this.main);
-    this.note = this.notesService.notes.find(({ id }) => id === this.main);
+      this.note = this.notesService.notes.find(({ id }) => id === this.main);
+     
+    
+    
     this.tit = this.note.title;
     this.content = this.note.content;
     this.id = this.note.id;
@@ -43,7 +44,16 @@ export class AddNotePage implements OnInit {
       this.nueva=true
     }
   }
+  delet(){
+    if(this.nueva==true){
+      this.notesService.delete(this.id);
+      this.navCtrl.back();
+    }else{
+      this.navCtrl.back();
 
+    }
+    
+  }
 
   async save() {
     if (this.nueva == true) {
