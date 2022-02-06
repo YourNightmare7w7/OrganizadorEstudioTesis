@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{tit||'newNote'}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle
+        ><ion-input [(ngModel)]="tit" type="text" placeholder="The name of your idea here">
+        </ion-input
+      ></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-textarea
+        [(ngModel)]="content"
+        placeholder="Your great idea here!"
+      ></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+     <ion-card *ngIf="nueva">
+      <ion-button (click)="delet()" expand="block" fill="clear" shape="round">
+        delite
+      </ion-button>
+     </ion-card>
+  <!--Colors-->
+  <!-- <ion-grid fixed>
+    <ion-row class="ion-text-center">
+      <ion-col class="ion-align-self-start">
+        <ion-card class="skyblue" (click)=" setColor('skyblue')" button="true">
+          <ion-card-content> </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-align-self-center">
+        <ion-card class="lightgreen" (click)=" setColor('lightgreen')" button="true">
+          <ion-card-content> </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-align-self-end"
+        ><ion-card class="gold" (click)=" setColor('gold')" button="true">
+          <ion-card-content> </ion-card-content> </ion-card
+      ></ion-col>
+    </ion-row>
+  </ion-grid> -->
+</ion-content>

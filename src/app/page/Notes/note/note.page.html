@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Note</ion-title>
+    <!--BtnBack-->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="addNote()">
+      <ion-icon slot="start" name="add">add Note</ion-icon>
+
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <ion-card
+    [routerLink]="['/note',note.id]"
+    *ngFor="let note of notesService.notes"
+    >
+      <ion-card-title > {{note.title}}</ion-card-title>
+      <ion-card-content>
+        {{note.content}}
+      </ion-card-content>
+  </ion-card>
+
+</ion-content>
