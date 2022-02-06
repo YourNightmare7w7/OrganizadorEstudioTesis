@@ -12,12 +12,15 @@ export class NotesService {
   }
   async start() {
     await this.storage.create();
-
-
   }
 
   async save() {
     await this.storage.set('notes', this.notes);
+  }
+  async modif(id){
+    await this.notes[id].content
+
+
   }
   async setValue(title,content) {
     let id=Math.max(...this.notes.map(note=>parseInt(note.id)),0)+1;
