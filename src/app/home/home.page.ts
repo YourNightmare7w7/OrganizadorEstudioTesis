@@ -11,10 +11,10 @@ export class HomePage implements OnInit{
 
   constructor(private navCtrl:NavController, private notesService: NotesService) {}
 toNotes(){
-  this.navCtrl.navigateForward('note')
+  this.navCtrl.navigateForward('note');
 }
 ngOnInit(){
-  this.notesService.start()
+  this.notesService.start();
 
 }
 

@@ -17,7 +17,7 @@ export class NotesService {
   async save() {
     await this.storage.set('notes', this.notes);
   }
-  
+
   async setValue(title,content) {
     let id=Math.max(...this.notes.map(note=>parseInt(note.id)),0)+1;
     await this.notes.push({
@@ -33,7 +33,7 @@ export class NotesService {
     this.notes.splice(iDelete,1);
     this.save();
 
-    
+
    }
 
 

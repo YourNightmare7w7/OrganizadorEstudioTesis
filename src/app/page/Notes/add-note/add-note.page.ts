@@ -33,9 +33,9 @@ export class AddNotePage implements OnInit {
     this.nueva = false;
     await this.notesService.notes.find(({ id }) => id === this.main);
       this.note = this.notesService.notes.find(({ id }) => id === this.main);
-     
-    
-    
+
+
+
     this.tit = this.note.title;
     this.content = this.note.content;
     this.id = this.note.id;
@@ -52,13 +52,13 @@ export class AddNotePage implements OnInit {
       this.navCtrl.back();
 
     }
-    
+
   }
 
   async save() {
     if (this.nueva == true) {
-      this.notesService.notes[(parseInt(this.id)-1)].content=this.content;
-      this.notesService.notes[(parseInt(this.id)-1)].title=this.tit;
+      this.notesService.notes[this.notesService.notes.findIndex(notas=>notas.id===this.id)].content=this.content;
+      this.notesService.notes[this.notesService.notes.findIndex(notas=>notas.id===this.id)].title=this.tit;
 
       this.nueva = false;
       this.navCtrl.back();
