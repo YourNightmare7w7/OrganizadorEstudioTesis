@@ -7,16 +7,13 @@ import { NotesService } from 'src/app/services/notes.service';
   styleUrls: ['./note.page.scss'],
 })
 export class NotePage implements OnInit {
+  constructor(
+    private navCtrl: NavController,
+    public notesService: NotesService
+  ) {}
 
-  constructor(private navCtrl:NavController, public notesService: NotesService) { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  addNote() {
+    this.navCtrl.navigateForward(['/tabs/note/', 'newNote']);
   }
-  addNote(){
-    this.navCtrl.navigateForward(['note/','newNote'])
-  }
- 
-  
-  
 }
-

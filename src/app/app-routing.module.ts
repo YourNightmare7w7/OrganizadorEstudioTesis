@@ -8,17 +8,27 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/tabs/note',
     pathMatch: 'full'
   },
+
   {
-    path: 'note',
-    loadChildren: () => import('./page/notes/note/note.module').then( m => m.NotePageModule)
+    path: 'tabs',
+    loadChildren: () => import('./page/tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: 'note/:title',
-    loadChildren: () => import('./page/notes/add-note/add-note.module').then( m => m.AddNotePageModule)
+    path: 'alarm',
+    loadChildren: () => import('./page/reloj/alarm/alarm.module').then( m => m.AlarmPageModule)
   },
+  {
+    path: 'cronometro',
+    loadChildren: () => import('./page/reloj/cronometro/cronometro.module').then( m => m.CronometroPageModule)
+  },
+  {
+    path: 'temporizador',
+    loadChildren: () => import('./page/reloj/temporizador/temporizador.module').then( m => m.TemporizadorPageModule)
+  }
+
 ];
 
 @NgModule({

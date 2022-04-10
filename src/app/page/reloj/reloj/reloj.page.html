@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button id="hover-button" slot="start">
+      <ion-icon slot="icon-only" name="menu"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="hover-button" triggerAction="hover" size="cover">
+      <ng-template>
+        <ion-button (click)="toCro()" >
+          <ion-icon slot="icon-only" name="alarm-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="toTemp()">
+          <ion-icon slot="icon-only" name="timer-outline"></ion-icon>
+        </ion-button>
+      </ng-template>
+    </ion-popover>
+    <ion-item button="true" id="open-date-input">
+      <ion-label style="text-align: center">Agregar alarma</ion-label>
+      <ion-popover
+        trigger="open-date-input"
+        show-backdrop="false"
+        alignment="center"
+      >
+        <ng-template>
+          <ion-datetime
+            presentation="time"
+            [(ngModel)]="alarm1"
+            #popoverDatetime
+          >
+            <ion-buttons slot="buttons">
+              <ion-button (click)="addAlarm()">Listo</ion-button>
+            </ion-buttons>
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="reloj">
+    <h1>{{time| date: "HH:mm:ss"}}</h1>
+  </div>
+
+  <ion-item *ngFor="let alarm of relojS.alarms">
+    <ion-item button="true" id="open-date-input1">
+      <ion-icon name="cog-outline"></ion-icon>
+
+      <ion-popover
+        trigger="open-date-input1"
+        show-backdrop="false"
+        alignment="center"
+      >
+        <ng-template>
+          <ion-datetime
+            presentation="time"
+            [(ngModel)]="alarm2"
+            #popoverDatetime1
+          >
+            <ion-buttons slot="buttons">
+              <ion-button (click)="changeAlarm(alarm.id)">Listo</ion-button>
+            </ion-buttons>
+          </ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-item>
+
+    <ion-label>{{alarm.date|date: "HH:mm:ss"}}</ion-label>
+    <ion-item>
+      <ion-item>
+        <ion-icon
+          *ngIf="alarm.active"
+          name="notifications-outline"
+          ngif
+        ></ion-icon>
+        <ion-icon
+          *ngIf="!alarm.active"
+          name="notifications-off-outline"
+        ></ion-icon>
+      </ion-item>
+      <ion-toggle [(ngModel)]="alarm.active" slot="end"></ion-toggle>
+    </ion-item>
+  </ion-item>
+</ion-content>
