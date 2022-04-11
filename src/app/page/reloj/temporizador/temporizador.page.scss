@@ -1,0 +1,18 @@
+
+.container{
+  text-align: center;
+  .numbers{
+    font-size: xx-large;
+    font-weight: 700;
+
+  }
+  .btns{
+
+
+    :active{
+      transition: 0.5s;
+      transform: scale(0.5);
+    }
+
+  }
+}

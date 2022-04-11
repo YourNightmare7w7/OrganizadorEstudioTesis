@@ -1,18 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button id="hover-button" slot="start">
-      <ion-icon slot="icon-only" name="menu"></ion-icon>
-    </ion-button>
-    <ion-popover trigger="hover-button" triggerAction="hover" size="cover">
-      <ng-template>
-        <ion-button (click)="toCro()" >
+
+        <ion-button (click)="toCro()" slot="start">
           <ion-icon slot="icon-only" name="alarm-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="toTemp()">
+        <ion-button (click)="toTemp()" slot="end">
           <ion-icon slot="icon-only" name="timer-outline"></ion-icon>
         </ion-button>
-      </ng-template>
-    </ion-popover>
     <ion-item button="true" id="open-date-input">
       <ion-label style="text-align: center">Agregar alarma</ion-label>
       <ion-popover

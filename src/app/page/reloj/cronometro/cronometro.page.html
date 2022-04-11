@@ -8,5 +8,28 @@
 </ion-header>
 
 <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col >
+          <ion-label class="minutes">00</ion-label>
+          <ion-label class="seconds">00</ion-label>
+          <ion-label class="mseconds">00</ion-label>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col  class="btns">
+          <ion-button (click)="stop()"fill="">
+            <ion-icon slot="icon-only" name="stop"></ion-icon>
+          </ion-button>
+          <ion-button (click)="start()" fill="">
+            <ion-icon slot="icon-only" name="play"></ion-icon>
+          </ion-button>
+          <ion-button (click)="reset()" fill="">
+            <ion-icon slot="icon-only" name="reload"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 </ion-content>

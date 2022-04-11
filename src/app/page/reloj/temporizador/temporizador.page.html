@@ -1,10 +1,84 @@
-<ion-header [translucent]="true">
-  <ion-toolbar >
-    <ion-title>
-    </ion-title>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" defaultHref="tabs/reloj">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Temporizador</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+<ion-card class="container">
+  <ion-grid fixed>
+    <ion-row  *ngIf="!disabled">
+      <ion-col size="4" class="btns"  >
+        <ion-button (click)="increment('H')"  size="small" fill="">
+          <ion-icon slot="icon-only" name="caret-up-outline"></ion-icon>
+        </ion-button>
 
+      </ion-col>
+      <ion-col size="4" class="btns">
+        <ion-button (click)="increment('M')"  size="small" fill="">
+          <ion-icon slot="icon-only" name="caret-up-outline"></ion-icon>
+        </ion-button>
+
+      </ion-col>
+      <ion-col size="4" class="btns">
+        <ion-button (click)="increment('S')"  size="small" fill="">
+          <ion-icon slot="icon-only" name="caret-up-outline"></ion-icon>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-label class="numbers">{{hours|number:'2.0'}}</ion-label>
+        <ion-label class="ind">H</ion-label>
+
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="numbers">{{minutes|number:'2.0'}}</ion-label>
+        <ion-label class="ind">M</ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="numbers">{{seconds|number:'2.0'}}</ion-label>
+        <ion-label class="ind">s</ion-label>
+      </ion-col>
+
+    </ion-row>
+    <ion-row  *ngIf="!disabled">
+      <ion-col size="4" class="btns"  >
+
+        <ion-button (click)="decrement('H')"  size="small" fill="">
+          <ion-icon slot="icon-only" name="caret-down-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4" class="btns">
+
+        <ion-button (click)="decrement('M')"  size="small" fill="">
+          <ion-icon slot="icon-only" name="caret-down-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="4" class="btns">
+
+        <ion-button (click)="decrement('S')" size="small" fill="">
+          <ion-icon slot="icon-only" name="caret-down-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="btns">
+        <ion-button (click)="stop()"fill="">
+          <ion-icon slot="icon-only" name="pause"></ion-icon>
+        </ion-button>
+        <ion-button (click)="start()" fill="">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+        <ion-button (click)="reset()" fill="">
+          <ion-icon slot="icon-only" name="reload"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
 </ion-content>
