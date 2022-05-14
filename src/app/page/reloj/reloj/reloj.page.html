@@ -1,12 +1,11 @@
 <ion-header>
   <ion-toolbar>
-
-        <ion-button (click)="toCro()" slot="start">
-          <ion-icon slot="icon-only" name="alarm-outline"></ion-icon>
-        </ion-button>
-        <ion-button (click)="toTemp()" slot="end">
-          <ion-icon slot="icon-only" name="timer-outline"></ion-icon>
-        </ion-button>
+    <ion-button (click)="toCro()" slot="start">
+      <ion-icon slot="icon-only" name="alarm-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="toTemp()" slot="end">
+      <ion-icon slot="icon-only" name="timer-outline"></ion-icon>
+    </ion-button>
     <ion-item button="true" id="open-date-input">
       <ion-label style="text-align: center">Agregar alarma</ion-label>
       <ion-popover
@@ -18,6 +17,7 @@
           <ion-datetime
             presentation="time"
             [(ngModel)]="alarm1"
+            hourCycle="h23"
             #popoverDatetime
           >
             <ion-buttons slot="buttons">
@@ -36,26 +36,9 @@
   </div>
 
   <ion-item *ngFor="let alarm of relojS.alarms">
-    <ion-item button="true" id="open-date-input1">
+    <ion-item button="true" id="alarm.id" (click)="changeAlarm(alarm.id,alarm.date)">
       <ion-icon name="cog-outline"></ion-icon>
 
-      <ion-popover
-        trigger="open-date-input1"
-        show-backdrop="false"
-        alignment="center"
-      >
-        <ng-template>
-          <ion-datetime
-            presentation="time"
-            [(ngModel)]="alarm2"
-            #popoverDatetime1
-          >
-            <ion-buttons slot="buttons">
-              <ion-button (click)="changeAlarm(alarm.id)">Listo</ion-button>
-            </ion-buttons>
-          </ion-datetime>
-        </ng-template>
-      </ion-popover>
     </ion-item>
 
     <ion-label>{{alarm.date|date: "HH:mm:ss"}}</ion-label>

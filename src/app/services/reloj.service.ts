@@ -2,9 +2,7 @@ import { AlarmPage } from './../page/reloj/alarm/alarm.page';
 import { Injectable } from '@angular/core';
 import { Alarm } from '../Interfaces/alarm';
 import { ModalController } from '@ionic/angular';
-import { BackgroundMode } from '@awesome-cordova-plugins/background-mode/ngx';
 import { format, parseISO } from 'date-fns';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +15,7 @@ export class RelojService {
 
   constructor(public modalCtrl: ModalController) {
     this.alarmTime();
-    setInterval(this.time,1000);
-    this.cambio= this.time;
+    this.cambio=setInterval(()=>this.alarmTime(),1000);
   }
 
   async addAlarm(date) {
@@ -33,29 +30,42 @@ export class RelojService {
   async changeAlarm(id, time) {
     const idAlarm = this.alarms.findIndex((e) => e.id === id);
     this.alarms[idAlarm].date = time;
+    this.alarms[idAlarm].active = true;
+
+
   }
 
   async alarmTime() {
+    this.hora=format(new Date(), 'HH:mm');
 
-if(this.hora!==this.cambio||this.primera===true){
+
   this.alarms.map((e) => {
+
     const dat = format(parseISO(e.date.toString()), 'HH:mm');
-    if(this.primera===true){this.primera=false}
-    if (dat === this.hora) {
-      this.modal();
-    }
-  });
-}
+if(this.primera===false){
 
-
-    }
-  time(){
-    this.hora = new Date().getHours()+':'+new Date().getMinutes();
-
+  if (dat === this.hora&&e.active===true) {
+    clearInterval(this.cambio);
+    this.primera=true;
+    this.alarma(e.id);
   }
-  async modal() {
+}
+  });
+
+
+    }
+  async alarma(id) {
     const modal = await this.modalCtrl.create({
       component: AlarmPage,
+    });
+    modal.onDidDismiss().then((e)=>{
+      this.alarms.map(f=>{
+        if(f.id===id){
+          f.active=e.data;
+        }
+      });
+      this.cambio=setInterval(()=>this.alarmTime(),1000);
+      this.primera=false;
     });
     return await modal.present();
   }

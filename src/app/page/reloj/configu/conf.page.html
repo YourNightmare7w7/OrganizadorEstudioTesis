@@ -1,0 +1,12 @@
+<ion-datetime
+presentation="time"
+hourCycle="h23"
+
+[(ngModel)]="alarm"
+
+#time
+>
+<ion-buttons slot="buttons">
+  <ion-button (click)="changeAlarm()">Listo</ion-button>
+</ion-buttons>
+</ion-datetime>

@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/note',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 
@@ -27,7 +27,19 @@ const routes: Routes = [
   {
     path: 'temporizador',
     loadChildren: () => import('./page/reloj/temporizador/temporizador.module').then( m => m.TemporizadorPageModule)
-  }
+  },
+  {
+    path: 'add-event',
+    loadChildren: () => import('./page/calendario/add-event/add-event.module').then( m => m.AddEventPageModule)
+  },
+  {
+    path: 'conf',
+    loadChildren: () => import('./page/reloj/configu/conf.module').then( m => m.ConfPageModule)
+  },
+
+
+
+
 
 ];
 

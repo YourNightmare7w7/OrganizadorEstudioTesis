@@ -1,0 +1,32 @@
+<ion-content>
+  <div id="containerp">
+    <div class="container">
+      <ion-label>{{date.date|date:'mediumDate'}}</ion-label>
+
+      <ion-title>Title</ion-title>
+
+      <ion-input
+        type="text"
+        [(ngModel)]="title"
+        placeholder="Tu titulo aqui"
+      ></ion-input>
+    </div>
+    <div class="container">
+      <ion-checkbox [(ngModel)]="allday"></ion-checkbox
+      ><ion-label>Todo el dia</ion-label>
+    </div>
+   <div *ngIf="!allday" >
+    <ion-item>
+      <ion-label>Inicio</ion-label>
+      <input type="datetime-local" [(ngModel)]="start"/>
+    </ion-item>
+    <ion-item>
+      <ion-label>Final</ion-label>
+      <input type="datetime-local" [(ngModel)]="end"/>
+    </ion-item>
+   </div>
+    <ion-button (click)="close()" expand="block" fill="clear" shape="round">
+      Agregar evento
+    </ion-button>
+  </div>
+</ion-content>

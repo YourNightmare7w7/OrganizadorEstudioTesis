@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'reloj',
         loadChildren: () => import('../reloj/reloj/reloj.module').then( m => m.RelojPageModule)
       },
+      {
+        path: 'calendario',
+        loadChildren: () => import('../calendario/calendario/calendario.module').then( m => m.CalendarioPageModule)
+      }
     ]
 
   },

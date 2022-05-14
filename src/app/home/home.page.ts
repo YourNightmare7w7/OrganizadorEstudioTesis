@@ -1,4 +1,4 @@
-import { NotesService } from './../services/notes.service';
+import { FireBaseServiceService } from './../services/fire-base-service.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,12 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit{
 
-  constructor(private navCtrl:NavController, private notesService: NotesService) {}
+  constructor(private navCtrl: NavController,private auth: FireBaseServiceService) {}
 toNotes(){
   this.navCtrl.navigateForward('note');
 }
 ngOnInit(){
-  this.notesService.start();
+
+
+}
+
+loginGoogle(){
+  
 
 }
 

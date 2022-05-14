@@ -10,7 +10,7 @@
 <ion-content [fullscreen]="true" class="ion-padding">
 <ion-card class="container">
   <ion-grid fixed>
-    <ion-row  *ngIf="!disabled">
+    <ion-row  *ngIf="show">
       <ion-col size="4" class="btns"  >
         <ion-button (click)="increment('H')"  size="small" fill="">
           <ion-icon slot="icon-only" name="caret-up-outline"></ion-icon>
@@ -46,7 +46,7 @@
       </ion-col>
 
     </ion-row>
-    <ion-row  *ngIf="!disabled">
+    <ion-row  *ngIf="show">
       <ion-col size="4" class="btns"  >
 
         <ion-button (click)="decrement('H')"  size="small" fill="">

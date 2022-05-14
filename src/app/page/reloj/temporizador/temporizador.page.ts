@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonDatetime } from '@ionic/angular';
-import { format, parseISO, add } from 'date-fns';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
   selector: 'app-temporizador',
   templateUrl: './temporizador.page.html',
@@ -21,42 +20,29 @@ export class TemporizadorPage implements OnInit {
   ngOnInit() {}
   increment(type: 'H' | 'M' | 'S') {
     if (type === 'H') {
-      if (this.hours >= 0) {
-        return (this.hours += 1);
-      }
+        return (this.hours++);
     } else if (type === 'M') {
-      if (this.minutes >= 0) {
-        return (this.minutes += 1);
-      }
+        return (this.minutes++);
     } else {
-      if (this.seconds >= 0) {
-        return (this.seconds += 1);
-      }
+        return (this.seconds++);
     }
   }
   decrement(type: 'H' | 'M' | 'S') {
     if (type === 'H') {
       if (this.hours !== 0) {
-        return (this.hours -= 1);
+        return (this.hours--);
       }
     } else if (type === 'M') {
       if (this.minutes !==  0) {
-        return (this.minutes -= 1);
+        return (this.minutes--);
       }
     } else {
       if (this.seconds !==  0) {
-        return (this.seconds -= 1);
+        return (this.seconds--);
       }
     }
   }
-  /* getValues() {
-    this.date.setHours(this.hours);
-    this.date.setMinutes(this.minutes);
-    this.date.setSeconds(this.seconds);
-    this.date.setMilliseconds(0);     //init value 0
-    //console.log(this.date.getTime())
-  }
- */
+
   updateTimer() {
     this.date.setHours(this.hours);
     this.date.setMinutes(this.minutes);
