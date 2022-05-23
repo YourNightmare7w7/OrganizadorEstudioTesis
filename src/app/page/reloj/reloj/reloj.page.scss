@@ -1,4 +1,30 @@
-.reloj{
-  text-align: center;
-  
+@import url('https://fonts.googleapis.com/css2?family=Bevan&family=Libre+Baskerville:ital@1&family=Nunito:wght@600&family=Roboto&display=swap');
+*{
+}
+ion-content{
+  --background: url('https://firebasestorage.googleapis.com/v0/b/organiz-2f2e3.appspot.com/o/koi-3303950.svg?alt=media&token=b28e4bb1-844f-46dc-9bd7-7b980ef9e865');
+  .reloj{
+    text-align: center;
+  h1{
+    font-family: 'Bevan',cursive;
+    letter-spacing: 0.25em;
+
+    margin: 1em;
+    padding: 3%;
+    border: solid 2px black;
+    border-radius: 20px;
+    font-size: xx-large;
+    background: rgba(236, 188, 253,0.9);
+    text-shadow: 2px 2px 2px white;
+    color: #10002b;
+
+  }
+  }
+  ion-item-sliding {
+     ion-item{
+      --background: rgba(192, 253, 255,0.9);
+
+      margin: 1px;
+     }
+  }
 }

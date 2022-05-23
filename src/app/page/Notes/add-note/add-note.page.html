@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -11,25 +11,29 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <ion-card>
+<ion-content >
+  <ion-card id="container" >
     <ion-card-header>
       <ion-card-subtitle
-        ><ion-input [(ngModel)]="tit" type="text" placeholder="The name of your idea here">
+        ><ion-input
+          [(ngModel)]="tit"
+          type="text"
+          placeholder="The name of your idea here"
+        >
         </ion-input
       ></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
       <ion-textarea
+      rows="20"
         [(ngModel)]="content"
         placeholder="Your great idea here!"
       ></ion-textarea>
     </ion-card-content>
   </ion-card>
-     <ion-card *ngIf="nueva">
-      <ion-button (click)="delet()" expand="block" fill="clear" shape="round">
-        delite
-      </ion-button>
-     </ion-card>
-  
+  <ion-card *ngIf="nueva" id="butt">
+    <ion-button (click)="delet()" expand="block" fill="clear" shape="round">
+      delite
+    </ion-button>
+  </ion-card>
 </ion-content>

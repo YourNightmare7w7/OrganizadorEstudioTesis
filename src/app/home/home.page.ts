@@ -10,16 +10,28 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit{
 
   constructor(private navCtrl: NavController,private auth: FireBaseServiceService) {}
-toNotes(){
-  this.navCtrl.navigateForward('note');
-}
+
 ngOnInit(){
+  this.exist();
 
 
 }
+ionViewDidEnter(){
+  this.exist();
+}
+exist(){
+  const exist = this.auth.localUser();
+  if(exist!==false){
+  this.navCtrl.navigateForward('tabs/note');
+  }
+}
 
-loginGoogle(){
-  
+async loginGoogle(){
+  const a =await  this.auth.login();
+  if(a=== undefined){
+  this.navCtrl.navigateForward('tabs/note');
+
+  }
 
 }
 

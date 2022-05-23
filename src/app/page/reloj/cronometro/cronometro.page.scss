@@ -1,31 +1,71 @@
-div{
-  padding: 10%;
-ion-grid{
-  border-radius: 20em;
-  text-align: center;
-
-
-  background-color: pink;
-  .minutes{
-    margin: 1%;
-  text-align: right;
-
-    font-size: xx-large;
-    font-weight: 600;
-  }
-  .seconds{
-    margin: 1%;
-    text-align: center;
-
-    font-size: xx-large;
-    font-weight: 600;
-  }
-  .mseconds{
-    margin: 1%;
-    font-size: xx-large;
-    font-weight: 600;
-
-    text-align: left;
-  }
+* {
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
 }
+ion-toolbar{
+  --background: #2D0E2F;
+  color: white;
+}
+ion-content{
+  --overflow: hidden;
+
+}
+#container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+background: url(https://firebasestorage.googleapis.com/v0/b/organiz-2f2e3.appspot.com/o/mountains-5689938.png?alt=media&token=c57afd71-9f98-43ce-b069-ae888bde4965);
+background-size: cover;
+background-position-y: center;
+
+  .box {
+    width: 80vw;
+    height: 20vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba($color: #37123C, $alpha: 0.8);
+    box-shadow: 7px 5px 10px  #1D091F;
+    #cir {
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background: #F7EBFD;
+    }
+    ion-grid {
+      z-index: 10;
+      position: relative;
+      padding: 5%;
+      width: 100%;
+      text-align: center;
+      color: white;
+
+      .minutes {
+        margin: 1%;
+        text-align: right;
+
+        font-size: xx-large;
+        font-weight: 600;
+      }
+      .seconds {
+        margin: 1%;
+        text-align: center;
+
+        font-size: xx-large;
+        font-weight: 600;
+      }
+      .mseconds {
+        margin: 1%;
+        font-size: xx-large;
+        font-weight: 600;
+
+        text-align: left;
+      }
+    }
+  }
 }

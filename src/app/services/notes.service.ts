@@ -1,20 +1,30 @@
+import { FireBaseServiceService } from './fire-base-service.service';
   import { Injectable } from '@angular/core';
   import { Storage } from '@ionic/storage-angular';
-  import { identity } from 'rxjs';
+  import { identity, Observable } from 'rxjs';
   import { Note } from '../Interfaces/notes';
   @Injectable({
     providedIn: 'root',
   })
   export class NotesService {
-    public notes: Note[] = [];
+    public notes: Note []=[];
+
     public loaded: boolean;
-    constructor(private storage: Storage) {}
-    async start() {
-      await this.storage.create();
+    constructor(private fire: FireBaseServiceService) {
+      this.start();
+    }
+    start(){
+      this.fire.getValues('Notes').subscribe(note=>{
+        this.saveV(note);
+      });
+
+    }
+    saveV(data){
+      this.notes=data;
     }
 
-  async save() {
-    await this.storage.set('notes', this.notes);
+   save() {
+    this.fire.addData('Notes',this.notes);
   }
 
   async setValue(title, content) {
@@ -26,10 +36,12 @@
     });
     this.save();
   }
+
   async delete(id) {
     const iDelete = this.notes.findIndex((e) => e.id === id);
     console.log(iDelete);
     this.notes.splice(iDelete, 1);
+    this.fire.deleteData('Notes',id);
     this.save();
   }
 }

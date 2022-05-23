@@ -35,26 +35,36 @@
     <h1>{{time| date: "HH:mm:ss"}}</h1>
   </div>
 
-  <ion-item *ngFor="let alarm of relojS.alarms">
-    <ion-item button="true" id="alarm.id" (click)="changeAlarm(alarm.id,alarm.date)">
-      <ion-icon name="cog-outline"></ion-icon>
 
-    </ion-item>
 
-    <ion-label>{{alarm.date|date: "HH:mm:ss"}}</ion-label>
-    <ion-item>
-      <ion-item>
-        <ion-icon
-          *ngIf="alarm.active"
-          name="notifications-outline"
-          ngif
-        ></ion-icon>
-        <ion-icon
-          *ngIf="!alarm.active"
-          name="notifications-off-outline"
-        ></ion-icon>
+  <ion-item-sliding *ngFor="let alarm of alarms">
+    <ion-item >
+      <ion-item
+        button="true"
+        id="alarm.id"
+        (click)="changeAlarm(alarm.id,alarm.date)"
+      >
+        <ion-icon name="cog-outline"></ion-icon>
       </ion-item>
-      <ion-toggle [(ngModel)]="alarm.active" slot="end"></ion-toggle>
+
+      <ion-label>{{alarm.date|date: "HH:mm:ss"}}</ion-label>
+      <ion-item >
+        <ion-item>
+          <ion-icon
+            *ngIf="alarm.active"
+            name="notifications-outline"
+            ngif
+          ></ion-icon>
+          <ion-icon
+            *ngIf="!alarm.active"
+            name="notifications-off-outline"
+          ></ion-icon>
+        </ion-item>
+        <ion-toggle (click)="save(alarm)" [(ngModel)]="alarm.active" slot="end"></ion-toggle>
+      </ion-item>
     </ion-item>
-  </ion-item>
+    <ion-item-options side="start">
+      <ion-item-option (click)="eliminar(alarm)">Eliminar</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-content>

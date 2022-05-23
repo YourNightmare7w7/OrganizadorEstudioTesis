@@ -9,6 +9,8 @@ import { format, add } from 'date-fns';
 })
 export class AddEventPage implements OnInit {
   @Input () date: any;
+  @Input () event: boolean;
+
   a = new Date();
   title: string;
   start: string;
@@ -17,6 +19,7 @@ export class AddEventPage implements OnInit {
 
   constructor(private modalCtrl: ModalController) { }
   ngOnInit() {
+    this.title=this.date.title;
     this.allday= this.date.allDay;
     if(this.date.end===undefined){
       this.start=format(this.date.date,'yyyy-MM-dd\'T\'HH:mm');
@@ -29,7 +32,7 @@ export class AddEventPage implements OnInit {
       this.start=format(this.date.start,'yyyy-MM-dd\'T\'HH:mm');
     this.end=format(this.date.end,'yyyy-MM-dd\'T\'HH:mm');
     }
-    console.log(this.date);
+
 
   }
 

@@ -1,3 +1,32 @@
-.center{
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Roboto&display=swap');
+
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    --border-color: none;
+  }
+ion-content{
+  --background: url('https://firebasestorage.googleapis.com/v0/b/organiz-2f2e3.appspot.com/o/leaves-5725356.svg?alt=media&token=dc8b1f08-9393-45ec-82b0-4be749952711') 1%  ;
+
+  .center{
+    text-align: center;
+  }
+  ion-button{
+    margin: 1em;
+  }
+  ion-card{
+
+    border-radius: 1em;
+    margin: 1em;
+    ion-card-title{
+      padding: .5em;
+      font-family: 'Nunito', sans-serif;
+      font-size: x-large;
+    }
+    ion-card-content{
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+  
 }
+

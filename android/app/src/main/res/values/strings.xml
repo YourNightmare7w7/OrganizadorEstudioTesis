@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">OrganizadorEstudio</string>
     <string name="title_activity_main">OrganizadorEstudio</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">io.organizador.log</string>
+    <string name="custom_url_scheme">io.organizador.log</string>
+    <string name="server_client_id">918626326557-m87q0d092u343dkjl9u09dasnrbd9fic.apps.googleusercontent.com</string>
 </resources>

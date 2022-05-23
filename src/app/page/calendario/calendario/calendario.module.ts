@@ -13,20 +13,23 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import listPlugin from '@fullcalendar/list'; // a plugin!
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+// register FullCalendar plugins
+FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin  ,
   interactionPlugin,
-  listPlugin
+  listPlugin,
+  bootstrap5Plugin
 ]);
 @NgModule({
   imports: [
+    FullCalendarModule,
     CommonModule,
     FormsModule,
     IonicModule,
     CalendarioPageRoutingModule,
-    FullCalendarModule,
 
   ],
   declarations: [CalendarioPage]

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/services/notes.service';
 import { Note } from 'src/app/Interfaces/notes';
 import { EMPTY } from 'rxjs';
+import { FireBaseServiceService } from 'src/app/services/fire-base-service.service';
 @Component({
   selector: 'app-add-note',
   templateUrl: './add-note.page.html',
@@ -13,7 +14,7 @@ export class AddNotePage implements OnInit {
   tit: string;
   content: string;
   id: string;
-  nueva:boolean;
+  nueva: boolean;
 
   main = this.route.snapshot.paramMap.get('title');
   public note: Note;
@@ -21,7 +22,8 @@ export class AddNotePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private notesService: NotesService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private fire: FireBaseServiceService
   ) {
     this.note = {
       id: '',
@@ -31,38 +33,33 @@ export class AddNotePage implements OnInit {
   }
   async ngOnInit() {
     this.nueva = false;
-    await this.notesService.notes.find(({ id }) => id === this.main);
-      this.note = this.notesService.notes.find(({ id }) => id === this.main);
+    this.note = await this.notesService.notes.find(
+      ({ id }) => id === this.main
+    );
+    if (this.note !== undefined) {
+      this.id = this.note.id;
+      this.tit = this.note.title;
+      this.nueva = true;
 
-
-
-    this.tit = this.note.title;
-    this.content = this.note.content;
-    this.id = this.note.id;
-    console.log(this.id);
-    if(this.id==this.main){
-      this.nueva=true
+      this.content = this.note.content;
     }
   }
-  delet(){
-    if(this.nueva==true){
+  delet() {
+    if (this.nueva === true) {
       this.notesService.delete(this.id);
       this.navCtrl.back();
-    }else{
-      this.navCtrl.back();
-
     }
-
   }
 
   async save() {
-    if (this.nueva == true) {
-      this.notesService.notes[this.notesService.notes.findIndex(notas=>notas.id===this.id)].content=this.content;
-      this.notesService.notes[this.notesService.notes.findIndex(notas=>notas.id===this.id)].title=this.tit;
-
-      this.nueva = false;
+    if (this.nueva === true) {
+      this.note = {
+        id: this.id,
+        title: this.tit,
+        content: this.content,
+      };
+      this.fire.changeValues('Notes', this.id, this.note);
       this.navCtrl.back();
-
     } else {
       this.navCtrl.back();
       this.notesService.setValue(this.tit, this.content);

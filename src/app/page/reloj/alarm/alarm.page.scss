@@ -1,0 +1,15 @@
+div{
+
+height: 80vh;
+}
+ion-content{
+  --background: url(https://firebasestorage.googleapis.com/v0/b/organiz-2f2e3.appspot.com/o/cosmos-5809271_640.png?alt=media&token=c17e952a-8a46-491e-bcd8-ffb827d65cc8) 100%;
+  ion-item-sliding{
+  }
+  ion-item{
+    font-size: x-large;
+text-align: center;
+    --background: rgba(222, 170, 255,0.9);
+
+  }
+}
