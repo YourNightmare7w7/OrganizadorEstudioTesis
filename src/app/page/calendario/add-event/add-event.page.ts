@@ -8,8 +8,8 @@ import { format, add } from 'date-fns';
   styleUrls: ['./add-event.page.scss'],
 })
 export class AddEventPage implements OnInit {
-  @Input () date: any;
-  @Input () event: boolean;
+  @Input() date: any;
+  @Input() event: boolean;
 
   a = new Date();
   title: string;
@@ -17,30 +17,29 @@ export class AddEventPage implements OnInit {
   end: string;
   allday: boolean;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController) {}
   ngOnInit() {
-    this.title=this.date.title;
-    this.allday= this.date.allDay;
-    if(this.date.end===undefined){
-      this.start=format(this.date.date,'yyyy-MM-dd\'T\'HH:mm');
-      const ad=add(new Date(this.start),{
-        hours:1
+    this.title = this.date.title;
+    this.allday = this.date.allDay;
+    if (this.date.end === undefined) {
+      this.start = format(this.date.date, 'yyyy-MM-dd\'T\'HH:mm');
+      const ad = add(new Date(this.start), {
+        hours: 1,
       });
-      this.end=format(ad,'yyyy-MM-dd\'T\'HH:mm');
-
-    }else{
-      this.start=format(this.date.start,'yyyy-MM-dd\'T\'HH:mm');
-    this.end=format(this.date.end,'yyyy-MM-dd\'T\'HH:mm');
+      this.end = format(ad, 'yyyy-MM-dd\'T\'HH:mm');
+    } else {
+      this.start = format(this.date.start, 'yyyy-MM-dd\'T\'HH:mm');
+      this.end = format(this.date.end, 'yyyy-MM-dd\'T\'HH:mm');
     }
-
-
   }
 
-  async close(){
-    const s=new Date(this.start);
-    const e=new Date(this.end);
+  async close() {
+    const s = new Date(this.start);
+    const e = new Date(this.end);
 
-    await this.modalCtrl.dismiss([this.title,this.allday,s,e]);
+    await this.modalCtrl.dismiss([this.title, this.allday, s, e]);
   }
-
+  async delet() {
+    await this.modalCtrl.dismiss('delete');
+  }
 }

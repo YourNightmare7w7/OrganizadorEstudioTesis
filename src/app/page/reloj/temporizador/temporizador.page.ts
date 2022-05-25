@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./temporizador.page.scss'],
 })
 export class TemporizadorPage implements OnInit {
+  audio = new Audio(
+    '../../../../assets/Música de violín (Épica Música sin Copyright).mp4'
+  );
   show = true;
   disabled = false;
   animate = false;
@@ -62,9 +65,16 @@ export class TemporizadorPage implements OnInit {
     ) {
       clearInterval(this.timer);
       this.animate = true;
+      this.audio.play();
       setTimeout(() => {
+        this.audio.pause();
+
+        this.audio = new Audio(
+          '../../../../assets/Música de violín (Épica Música sin Copyright).mp4'
+        );
+
         this.stop();
-      }, 5000);
+      }, 10000);
     }
   }
 

@@ -41,7 +41,9 @@ export class CronometroPage implements OnInit {
   elemA;
 
   constructor(public platform: Platform) {}
-
+  ionViewDidLeave() {
+    this.stop();
+  }
   ngOnInit() {
     this.width = this.platform.width() * 0.4;
     this.height = this.platform.height() * 0.1;

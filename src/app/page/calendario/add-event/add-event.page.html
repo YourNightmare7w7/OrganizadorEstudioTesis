@@ -3,30 +3,47 @@
     <div class="container">
       <ion-label>{{date.date|date:'mediumDate'}}</ion-label>
 
-
       <ion-input
         type="text"
         [(ngModel)]="title"
-        placeholder="Tu titulo aqui"
-        style="font-size:xx-large;"
+        placeholder="Tu titulo aquí"
+        style="font-size: xx-large"
       ></ion-input>
     </div>
     <div class="container">
       <ion-checkbox [(ngModel)]="allday"></ion-checkbox
       ><ion-label>Todo el dia</ion-label>
     </div>
-   <div *ngIf="!allday" >
-    <ion-item>
-      <ion-label>Inicio</ion-label>
-      <input type="datetime-local" [(ngModel)]="start"/>
-    </ion-item>
-    <ion-item>
-      <ion-label>Final</ion-label>
-      <input type="datetime-local" [(ngModel)]="end"/>
-    </ion-item>
-   </div>
-    <ion-button (click)="close()" expand="block" fill="clear" shape="round">
+    <div *ngIf="!allday" id="date">
+      <ion-item>
+        <ion-label>Inicio</ion-label>
+        <input type="datetime-local" [(ngModel)]="start" />
+      </ion-item>
+      <ion-item>
+        <ion-label>Final</ion-label>
+        <input type="datetime-local" [(ngModel)]="end" />
+      </ion-item>
+    </div>
+    <ion-button
+      (click)="close()"
+      expand="block"
+      fill="clear"
+      shape="round"
+      *ngIf="!event"
+    >
       Agregar evento
+    </ion-button>
+    <ion-button
+      (click)="close()"
+      expand="block"
+      fill="clear"
+      shape="round"
+      *ngIf="event"
+    >
+      Guardar
+    </ion-button>
+    <ion-button (click)="delet()" *ngIf="event">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
   </div>
 </ion-content>

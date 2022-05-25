@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title> {{tit||'newNote'}} </ion-title>
+    <ion-title> {{tit||'Nueva nota'}} </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="save()">
         <ion-icon name="checkmark-outline"></ion-icon>
@@ -11,8 +11,8 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content >
-  <ion-card id="container" >
+<ion-content>
+  <ion-card id="container">
     <ion-card-header>
       <ion-card-subtitle
         ><ion-input
@@ -25,7 +25,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-textarea
-      rows="20"
+        rows="15"
         [(ngModel)]="content"
         placeholder="Your great idea here!"
       ></ion-textarea>
@@ -33,7 +33,7 @@
   </ion-card>
   <ion-card *ngIf="nueva" id="butt">
     <ion-button (click)="delet()" expand="block" fill="clear" shape="round">
-      delite
+      Eliminar
     </ion-button>
   </ion-card>
 </ion-content>

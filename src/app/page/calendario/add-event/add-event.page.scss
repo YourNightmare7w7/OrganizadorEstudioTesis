@@ -1,20 +1,29 @@
-ion-content{
+ion-content {
   --background: #ebd9fc;
-
 }
-#containerp{
+ion-label {
+  color: black;
+}
+ion-input {
+  --placeholder-color: grey;
+}
+#containerp {
   padding: 10%;
   text-align: center;
-  .container{
-    ion-checkbox,ion-label{
-      vertical-align:middle;
+  .container {
+    ion-checkbox,
+    ion-label {
+      vertical-align: middle;
       font-size: medium;
     }
-    ion-checkbox{
+    ion-checkbox {
       margin: 1em;
     }
-    .c{
-
+    ion-item,
+    input,
+    .date ion-label {
+      --background: #deaaff;
+      background: #deaaff;
     }
   }
 }

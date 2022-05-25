@@ -3,7 +3,6 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/services/notes.service';
 import { Note } from 'src/app/Interfaces/notes';
-import { EMPTY } from 'rxjs';
 import { FireBaseServiceService } from 'src/app/services/fire-base-service.service';
 @Component({
   selector: 'app-add-note',
@@ -55,7 +54,7 @@ export class AddNotePage implements OnInit {
     if (this.nueva === true) {
       this.note = {
         id: this.id,
-        title: this.tit,
+        title: this.tit || '',
         content: this.content,
       };
       this.fire.changeValues('Notes', this.id, this.note);

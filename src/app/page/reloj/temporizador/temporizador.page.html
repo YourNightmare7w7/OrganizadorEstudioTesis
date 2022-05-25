@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" defaultHref="tabs/reloj">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Temporizador</ion-title>
   </ion-toolbar>
@@ -9,7 +9,7 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="con">
-    <ion-card class="container">
+    <ion-card class="container" [class.move]="animate">
       <ion-grid fixed>
         <ion-row *ngIf="show">
           <ion-col size="4" class="btns">
@@ -27,7 +27,6 @@
               <ion-icon slot="icon-only" name="caret-up-outline"></ion-icon>
             </ion-button>
           </ion-col>
-          
         </ion-row>
         <ion-row>
           <ion-col size="4">

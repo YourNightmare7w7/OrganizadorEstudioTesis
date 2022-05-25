@@ -12,9 +12,9 @@ import { Alarm } from 'src/app/Interfaces/alarm';
 })
 export class RelojPage implements OnInit {
   @ViewChild('popoverDatetime') datetime: IonDatetime;
-  public alarms =[];
+  public alarms = [];
   public compare;
-  primera=true;
+  primera = true;
   time: Date = new Date();
   alarm1: any;
   alarm2: any;
@@ -44,17 +44,17 @@ export class RelojPage implements OnInit {
       this.saveV(alarm);
     });
   }
-  async save(a){
+  async save(a) {
     console.log(a);
     console.log(this.alarms);
-    a.active=!a.active;
-    this.fire.changeValues('Alarms',a.id,a);
+    a.active = !a.active;
+    this.fire.changeValues('Alarms', a.id, a);
   }
-  saveV(data){
+  saveV(data) {
     this.alarms = data;
   }
-  eliminar(alarm){
-    this.fire.deleteData('Alarms',alarm.id);
+  eliminar(alarm) {
+    this.fire.deleteData('Alarms', alarm.id);
   }
   async addAlarm() {
     await this.datetime.confirm();
@@ -75,8 +75,9 @@ export class RelojPage implements OnInit {
     await popover.present();
 
     const a = await popover.onDidDismiss();
-
-    console.log('xd',a.data);
-    this.relojS.changeAlarm(id, a.data);
+    if (a.data !== null && a.data !== undefined) {
+      console.log('xd', a.data);
+      this.relojS.changeAlarm(id, a.data);
+    }
   }
 }

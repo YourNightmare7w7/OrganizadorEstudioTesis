@@ -3,13 +3,12 @@
   border: 0;
   box-sizing: border-box;
 }
-ion-toolbar{
-  --background: #2D0E2F;
+ion-toolbar {
+  --background: #2d0e2f;
   color: white;
 }
-ion-content{
+ion-content {
   --overflow: hidden;
-
 }
 #container {
   display: flex;
@@ -17,9 +16,9 @@ ion-content{
   justify-content: center;
   align-items: center;
   min-height: 100%;
-background: url(https://firebasestorage.googleapis.com/v0/b/organiz-2f2e3.appspot.com/o/mountains-5689938.png?alt=media&token=c57afd71-9f98-43ce-b069-ae888bde4965);
-background-size: cover;
-background-position-y: center;
+  background: url(../../../../assets/mountains-5689938.png);
+  background-size: cover;
+  background-position-y: center;
 
   .box {
     width: 80vw;
@@ -28,14 +27,14 @@ background-position-y: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba($color: #37123C, $alpha: 0.8);
-    box-shadow: 7px 5px 10px  #1D091F;
+    background-color: rgba($color: #37123c, $alpha: 0.8);
+    box-shadow: 7px 5px 10px #1d091f;
     #cir {
       border-radius: 50%;
       width: 20px;
       height: 20px;
       position: absolute;
-      background: #F7EBFD;
+      background: #f7ebfd;
     }
     ion-grid {
       z-index: 10;

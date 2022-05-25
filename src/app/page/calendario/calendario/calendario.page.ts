@@ -1,15 +1,12 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { AddEventPage } from '../add-event/add-event.page';
 import { Platform } from '@ionic/angular';
-import { format, parseISO } from 'date-fns';
 import { Datos } from 'src/app/Interfaces/datos';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { FireBaseServiceService } from 'src/app/services/fire-base-service.service';
-import { id } from 'date-fns/locale';
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.page.html',
@@ -17,46 +14,46 @@ import { id } from 'date-fns/locale';
 })
 export class CalendarioPage implements OnInit {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-  datos: Datos[] = [];
-  events;
-  eve =[];
+  events = [];
   date = new Date();
-  calendarOptions: CalendarOptions;
+
+  calendarOptions: CalendarOptions = {
+    headerToolbar: {
+      left: 'today prev,next',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+    },
+    footerToolbar: {
+      center: 'title',
+    },
+    events: this.events,
+    titleFormat: { year: 'numeric', month: 'short' },
+    duration: { days: 3 },
+    eventDrop: (e) => {
+      console.log(e);
+    },
+    eventResize: (e) => {
+      console.log(e);
+    },
+    initialView: 'dayGridMonth',
+    dayMaxEventRows: 2,
+    eventMaxStack: 2,
+    selectMirror: true,
+    editable: true,
+    nowIndicator: true,
+    selectable: true,
+    eventClick: (info) => this.eventInfo(info.event),
+    select: (info) => {
+      this.addEventSelect(info);
+    },
+  };
   constructor(
     public modaCtrl: ModalController,
     public platform: Platform,
     public afs: FireBaseServiceService
-  ) {
-
-  }
+  ) {}
 
   async ngOnInit() {
-    await this.get();
-
-    this.calendarOptions= {
-      headerToolbar: {
-        left: 'today prev,next',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-      },
-      footerToolbar: {
-        center: 'title',
-      },
-
-      titleFormat: { year: 'numeric', month: 'short' },
-      duration: { days: 3 },
-      initialView: 'dayGridMonth',
-      dayMaxEventRows: 2,
-      eventMaxStack: 2,
-      selectMirror: true,
-      editable: true,
-      nowIndicator: true,
-      selectable: true,
-      eventClick: (info) => this.eventInfo(info.event),
-      select: (info) => {
-        this.addEventSelect(info);
-      },
-    };
-
+    this.values();
 
     this.calendarOptions.height =
       this.platform.height() - this.platform.height() * 0.2;
@@ -70,20 +67,32 @@ export class CalendarioPage implements OnInit {
     }, 1);
   }
 
-  async get(){
-    await this.afs.getValues('Calendar').subscribe(even=>{
-      this.save(even);
-    });
-  }
-  save(a){
-    this.events=a;
+  values() {
+    this.afs.getValues('Calendar').subscribe((e) => {
+      this.calendarComponent.getApi().removeAllEvents();
 
-    console.log(this.events);
+      e.forEach((element) => {
+        const event = {
+          title: element.title,
+          id: element.id,
+          start: new Date(1000 * element.start.seconds),
+          end: new Date(1000 * element.end.seconds),
+          allDay: element.allDay,
+        };
+        const indx = this.events.findIndex((even) => even.id === event.id);
+        if (indx !== -1) {
+          this.events[indx] = event;
+        } else {
+          this.events.push(event);
+        }
+        this.calendarComponent.getApi().addEventSource([event]);
+      });
+    });
   }
 
   async addEventSelect(info) {
-    //se obtiene la api de fullcalendar para modificar
     const calendarApi = this.calendarComponent.getApi();
+    //se obtiene la api de fullcalendar para modificar
     //comprueba si selecciono un solo dia dentro del visor de meses
     //si es asi nos traslada a la vista del dia seleccionado
     if (
@@ -105,8 +114,8 @@ export class CalendarioPage implements OnInit {
       });
       //recuperamos la información del evento
       modal.onDidDismiss().then((modelDate) => {
-        if (modelDate !== null) {
-          const id = this.orden(modelDate.data);
+        if (modelDate !== null && modelDate.data !== undefined) {
+          const id = this.orden();
           const event = {
             id: id.toString(),
             title: modelDate.data[0] || 'event',
@@ -114,6 +123,8 @@ export class CalendarioPage implements OnInit {
             end: modelDate.data[3],
             allDay: modelDate.data[1],
           };
+          console.log(event);
+          this.afs.addData('Calendar', event);
           //agregamos el evento al calendario
           calendarApi.addEvent(event);
         }
@@ -123,41 +134,8 @@ export class CalendarioPage implements OnInit {
     }
   }
 
-
-  orden(date) {
-    const dat = format(new Date(date[2]), 'yMM');
-    const indx = this.datos.findIndex((i) => i.id === dat);
-    let id = 1;
-    if (indx !== -1) {
-      id =
-        Math.max(...this.datos[indx].events.map((d) => parseInt(d.id, 10)), 0) +
-        1;
-    }
-    console.log(dat);
-    const event = {
-      id: id.toString(),
-      title: date[0],
-      start: date[2],
-      end: date[3],
-      allDay: date[1],
-    };
-    if (this.datos.length === 0) {
-      this.datos.push({
-        id: dat,
-        events: [event],
-      });
-    } else {
-      const inx = this.datos.findIndex((i) => i.id === dat);
-      if (inx !== -1) {
-        this.datos[inx].events.push(event);
-      } else {
-        this.datos.push({
-          id: dat,
-          events: [event],
-        });
-      }
-    }
-
+  orden() {
+    const id = Math.max(...this.events.map((d) => parseInt(d.id, 10)), 0) + 1;
     return id;
   }
   async eventInfo(info) {
@@ -173,7 +151,11 @@ export class CalendarioPage implements OnInit {
     });
     //recuperamos la información del evento
     modalE.onDidDismiss().then((modelDate) => {
-      if (modelDate !== null) {
+      if (
+        modelDate.data !== null &&
+        modelDate.data !== 'delete' &&
+        modelDate.data !== undefined
+      ) {
         const calendarApi = this.calendarComponent.getApi();
         const event = {
           id: info.id,
@@ -182,6 +164,9 @@ export class CalendarioPage implements OnInit {
           end: modelDate.data[3],
           allDay: modelDate.data[1],
         };
+        this.afs.changeValues('Calendar', info.id, event);
+      } else {
+        this.afs.deleteData('Calendar', info.id);
       }
     });
     return await modalE.present();

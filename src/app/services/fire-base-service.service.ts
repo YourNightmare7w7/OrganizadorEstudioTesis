@@ -94,24 +94,25 @@ export class FireBaseServiceService {
     const uColl = this.fire.collection('users');
     return uColl.doc(user.id).set(data);
   }
-  addData(coll,data) {
+  addData(coll, data) {
     const user = JSON.parse(this.localUser() || '');
-    const notC = this.fire
-      .collection('users')
-      .doc(user.uid)
-      .collection(coll);
-    data.forEach((not) => {
-      notC.doc(not.id).set(not);
-    });
+    const notC = this.fire.collection('users').doc(user.uid).collection(coll);
+    if (coll === 'Calendar') {
+      notC.doc(data.id).set(data);
+    } else {
+      data.forEach((not) => {
+        notC.doc(not.id).set(not);
+      });
+    }
   }
-  deleteData(coll,id){
+  deleteData(coll, id) {
     const user = JSON.parse(this.localUser() || '');
     const notC = this.fire
       .collection('users')
       .doc(user.uid)
-      .collection(coll).doc(id);
-      return notC.delete();
-
+      .collection(coll)
+      .doc(id);
+    return notC.delete();
   }
 
   changeValues(collection, id, data) {
@@ -125,6 +126,13 @@ export class FireBaseServiceService {
   }
   getValues(collection) {
     const user = JSON.parse(this.localUser() || '');
+    console.log(
+      this.fire
+        .collection('users')
+        .doc(user.uid)
+        .collection(collection)
+        .valueChanges()
+    );
     return this.fire
       .collection('users')
       .doc(user.uid)

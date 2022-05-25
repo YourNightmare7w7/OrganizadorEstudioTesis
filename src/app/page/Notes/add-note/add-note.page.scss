@@ -1,20 +1,18 @@
-
-ion-content{
+ion-content {
   --overflow: hidden;
-  --background: url('https://firebasestorage.googleapis.com/v0/b/organiz-2f2e3.appspot.com/o/night-4822906.png?alt=media&token=efb15fe6-bca9-422a-ab69-572ae5c8fb2f') 0 0/100% 100% no-repeat;
-//0 0/100% 100%
+  --background: url(../../../../assets//night-4822906.png) 0 0/100% 100%
+    no-repeat;
+  //0 0/100% 100%
 
   background-size: cover;
-  #butt{
+  #butt {
     background: rgba(242, 0, 137);
-
   }
-  #container{
-    background: rgba(230, 250, 252,0.90);
+  #container {
+    background: rgba(230, 250, 252, 0.9);
 
-    ion-card-title{
+    ion-card-title {
       font-size: large;
     }
-
-}
+  }
 }

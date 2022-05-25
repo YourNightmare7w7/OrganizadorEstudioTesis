@@ -1,23 +1,25 @@
-<ion-header   class="ion-no-border">
-  <ion-toolbar >
-    <ion-button style="--background: #d55d92;--background-activated: #db00b6" (click)="addNote()" expand="block">
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-button
+      style="--background: #d55d92; --background-activated: #db00b6"
+      (click)="addNote()"
+      expand="block"
+    >
       <ion-icon slot="start" name="add"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen="true ">
-
-<div>
-
-
-  <ion-card style="background-color: #f7ebfd;"
-    [routerLink]="['/tabs/note',note.id]"
-    *ngFor="let note of notesService.notes"
-  >
-<ion-card-header>
-  <ion-card-title> {{note.title}}</ion-card-title>
-</ion-card-header>
-    <ion-card-content> {{note.content}} </ion-card-content>
-  </ion-card>
-</div>
+  <div>
+    <ion-card
+      style="background-color: #f7ebfd"
+      [routerLink]="['/tabs/note',note.id]"
+      *ngFor="let note of notesService.notes"
+    >
+      <ion-card-header>
+        <ion-card-title> {{note.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content> {{note.content}} </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -9,6 +9,10 @@
     <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundModeExt"/>
   </feature>
 
+  <feature name="NativeAudio">
+    <param name="android-package" value="com.rjfun.cordova.plugin.nativeaudio.NativeAudio"/>
+  </feature>
+
   <feature name="OneSignalPush">
     <param name="android-package" value="com.onesignal.cordova.OneSignalPush"/>
   </feature>

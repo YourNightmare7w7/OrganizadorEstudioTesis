@@ -17,7 +17,7 @@ const routes: Routes = [
     loadChildren: () => import('./page/tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
-    path: 'alarm',
+    path: 'alarm/:id',
     loadChildren: () => import('./page/reloj/alarm/alarm.module').then( m => m.AlarmPageModule)
   },
   {

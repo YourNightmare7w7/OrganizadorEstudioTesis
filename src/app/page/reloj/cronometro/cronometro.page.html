@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" defaultHref="tabs/reloj">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>cronometro</ion-title>
   </ion-toolbar>
@@ -24,12 +24,12 @@
           </ion-col>
         </ion-row>
 
-        <ion-row  >
-          <ion-col class="btns" >
+        <ion-row>
+          <ion-col class="btns">
             <ion-button (click)="stop()" fill="">
               <ion-icon slot="icon-only" name="pause"></ion-icon>
             </ion-button>
-            <ion-button (click)="start()" fill="" >
+            <ion-button (click)="start()" fill="">
               <ion-icon slot="icon-only" name="play"></ion-icon>
             </ion-button>
             <ion-button (click)="reset()" fill="">
