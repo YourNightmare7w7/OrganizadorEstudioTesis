@@ -1,11 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Roboto&display=swap");
 
-ion-toolbar {
-  --background: transparent;
-  --ion-color-base: transparent !important;
+ion-header{
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
   --border-color: none;
+
+
+
+
+  }
 }
 ion-content {
+
   --background: url(../../../../assets/leaves-5725356.svg) 1%;
 
   .center {

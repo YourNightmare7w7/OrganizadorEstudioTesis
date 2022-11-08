@@ -13,6 +13,10 @@
     <param name="android-package" value="com.rjfun.cordova.plugin.nativeaudio.NativeAudio"/>
   </feature>
 
+  <feature name="CDVOrientation">
+    <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation"/>
+  </feature>
+
   <feature name="OneSignalPush">
     <param name="android-package" value="com.onesignal.cordova.OneSignalPush"/>
   </feature>

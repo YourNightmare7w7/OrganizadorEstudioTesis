@@ -124,15 +124,16 @@ export class FireBaseServiceService {
       .doc(id)
       .update(data);
   }
+  getOne(collection,id){
+    const user = JSON.parse(this.localUser() || '');
+    return this.fire
+    .collection('users')
+    .doc(user.uid)
+    .collection(collection)
+    .doc(id).valueChanges();
+  }
   getValues(collection) {
     const user = JSON.parse(this.localUser() || '');
-    console.log(
-      this.fire
-        .collection('users')
-        .doc(user.uid)
-        .collection(collection)
-        .valueChanges()
-    );
     return this.fire
       .collection('users')
       .doc(user.uid)

@@ -24,6 +24,25 @@
         <input type="datetime-local" [(ngModel)]="end" />
       </ion-item>
     </div>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          Single Selection
+        </ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Repetir</ion-label>
+        <ion-select [(ngModel)]="repeat" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="no">No repetir</ion-select-option>
+          <ion-select-option value="">cada día</ion-select-option>
+          <ion-select-option value="daily">cada {{day}}</ion-select-option>
+          <ion-select-option value="semana">cada semana</ion-select-option>
+          <ion-select-option value="mes">cada mes</ion-select-option>
+          <ion-select-option value="año">cada año</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
     <ion-button
       (click)="close()"
       expand="block"
@@ -33,6 +52,31 @@
     >
       Agregar evento
     </ion-button>
+
+    <ion-segment scrollable [(ngModel)]="color">
+      <ion-segment-button value="#C1AE7C">
+        <ion-icon style="color: #C1AE7C;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="#1B998B">
+        <ion-icon style="color: #1B998B;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="#BAD7F2">
+        <ion-icon style="color: #BAD7F2;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="#F2BAC9">
+        <ion-icon style="color: #F2BAC9;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="#92140C">
+        <ion-icon style="color: #92140C;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="#ffbd00">
+        <ion-icon style="color: #ffbd00;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="#390099">
+        <ion-icon style="color: #390099;" name="square-sharp"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
     <ion-button
       (click)="close()"
       expand="block"
@@ -45,5 +89,6 @@
     <ion-button (click)="delet()" *ngIf="event">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
+
   </div>
 </ion-content>

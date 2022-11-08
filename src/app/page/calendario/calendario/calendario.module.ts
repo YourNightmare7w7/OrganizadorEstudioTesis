@@ -13,7 +13,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import listPlugin from '@fullcalendar/list'; // a plugin!
-import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import rrulePlugin from '@fullcalendar/rrule';
 
 // register FullCalendar plugins
 FullCalendarModule.registerPlugins([
@@ -21,7 +21,7 @@ FullCalendarModule.registerPlugins([
   timeGridPlugin  ,
   interactionPlugin,
   listPlugin,
-  bootstrap5Plugin
+  rrulePlugin
 ]);
 @NgModule({
   imports: [

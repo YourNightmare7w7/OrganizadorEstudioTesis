@@ -1,10 +1,17 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { AddEventPage } from '../add-event/add-event.page';
 import { Platform } from '@ionic/angular';
-import { Datos } from 'src/app/Interfaces/datos';
+import esLocale from '@fullcalendar/core/locales/es';
 import 'bootstrap/dist/css/bootstrap.css';
+import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { FireBaseServiceService } from 'src/app/services/fire-base-service.service';
 @Component({
@@ -34,6 +41,7 @@ export class CalendarioPage implements OnInit {
     eventResize: (e) => {
       console.log(e);
     },
+    locale: esLocale,
     initialView: 'dayGridMonth',
     dayMaxEventRows: 2,
     eventMaxStack: 2,
@@ -49,36 +57,60 @@ export class CalendarioPage implements OnInit {
   constructor(
     public modaCtrl: ModalController,
     public platform: Platform,
-    public afs: FireBaseServiceService
+    public afs: FireBaseServiceService,
+    private screenOrientation: ScreenOrientation
   ) {}
 
   async ngOnInit() {
+    this.screenOrientation.onChange().subscribe((i) => {
+      this.resize();
+    });
     this.values();
-
-    this.calendarOptions.height =
-      this.platform.height() - this.platform.height() * 0.2;
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-    }, 1);
+  }
+  resize() {
+    if (this.screenOrientation.type === 'portrait-primary') {
+      this.calendarComponent.options.height = this.platform.width() * 0.9;
+    } else {
+      this.calendarComponent.options.height = this.platform.width() * 0.75;
+    }
   }
   ionViewDidEnter() {
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
+      if (this.screenOrientation.type === 'portrait-primary') {
+        this.calendarOptions.height = this.platform.height() * 0.9;
+      } else {
+        this.calendarOptions.height = this.platform.height() * 0.75;
+      }
     }, 1);
   }
 
   values() {
     this.afs.getValues('Calendar').subscribe((e) => {
       this.calendarComponent.getApi().removeAllEvents();
-
+      let event;
       e.forEach((element) => {
-        const event = {
-          title: element.title,
-          id: element.id,
-          start: new Date(1000 * element.start.seconds),
-          end: new Date(1000 * element.end.seconds),
-          allDay: element.allDay,
-        };
+        if (element.rrule === undefined) {
+          event = {
+            title: element.title,
+            id: element.id,
+            start: new Date(1000 * element.start.seconds),
+            end: new Date(1000 * element.end.seconds),
+            allDay: element.allDay,
+            color: element.color,
+          };
+        } else {
+          event = {
+            title: element.title,
+            id: element.id,
+            endTime:element.end,
+            startTime:element.start,
+
+              rrule: element.rrule,
+            color: element.color,
+          };
+        }
+
         const indx = this.events.findIndex((even) => even.id === event.id);
         if (indx !== -1) {
           this.events[indx] = event;
@@ -99,7 +131,7 @@ export class CalendarioPage implements OnInit {
       info.view.type === 'dayGridMonth' &&
       info.end.getDate() === info.start.getDate() + 1
     ) {
-      calendarApi.changeView('timeGridDay', info.dateStr);
+      calendarApi.changeView('timeGridDay', info.startStr);
     } else {
       //Creamos un modal y presentamos
       //la ventana de creación de eventos
@@ -116,17 +148,29 @@ export class CalendarioPage implements OnInit {
       modal.onDidDismiss().then((modelDate) => {
         if (modelDate !== null && modelDate.data !== undefined) {
           const id = this.orden();
-          const event = {
-            id: id.toString(),
-            title: modelDate.data[0] || 'event',
-            start: modelDate.data[2],
-            end: modelDate.data[3],
-            allDay: modelDate.data[1],
-          };
-          console.log(event);
+          let event;
+          if (modelDate.data[5] !== undefined) {
+            event = {
+              id: id.toString(),
+              title: modelDate.data[0] || 'event',
+              startTime:modelDate.data[2],
+
+              endTime:modelDate.data[3],
+              rrule: modelDate.data[5],
+              color: modelDate.data[4],
+            };
+          } else {
+            event = {
+              id: id.toString(),
+              title: modelDate.data[0] || 'event',
+              start: modelDate.data[2],
+              end: modelDate.data[3],
+              allDay: modelDate.data[1],
+              color: modelDate.data[4],
+            };
+          }
           this.afs.addData('Calendar', event);
           //agregamos el evento al calendario
-          calendarApi.addEvent(event);
         }
       });
 
@@ -139,7 +183,6 @@ export class CalendarioPage implements OnInit {
     return id;
   }
   async eventInfo(info) {
-    console.log(info);
     const modalE = await this.modaCtrl.create({
       component: AddEventPage,
       initialBreakpoint: 0.5,
@@ -151,6 +194,7 @@ export class CalendarioPage implements OnInit {
     });
     //recuperamos la información del evento
     modalE.onDidDismiss().then((modelDate) => {
+      console.log(modelDate.data);
       if (
         modelDate.data !== null &&
         modelDate.data !== 'delete' &&
@@ -163,9 +207,10 @@ export class CalendarioPage implements OnInit {
           start: modelDate.data[2],
           end: modelDate.data[3],
           allDay: modelDate.data[1],
+          color: modelDate.data[4],
         };
         this.afs.changeValues('Calendar', info.id, event);
-      } else {
+      } else if (modelDate.data === 'delete') {
         this.afs.deleteData('Calendar', info.id);
       }
     });

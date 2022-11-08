@@ -36,7 +36,7 @@ export class AddNotePage implements OnInit {
       ({ id }) => id === this.main
     );
     if (this.note !== undefined) {
-      this.id = this.note.id;
+      this.id = this.note.id ;
       this.tit = this.note.title;
       this.nueva = true;
 
@@ -55,7 +55,7 @@ export class AddNotePage implements OnInit {
       this.note = {
         id: this.id,
         title: this.tit || '',
-        content: this.content,
+        content: this.content ||'',
       };
       this.fire.changeValues('Notes', this.id, this.note);
       this.navCtrl.back();
